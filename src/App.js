@@ -15,7 +15,6 @@ const Header = styled.header`
 
 const Main = styled.main`
   text-align: center;
-  width: 100%;
   background-color: whitesmoke;
 `;
 
