@@ -1,6 +1,7 @@
 import React from 'react';
 import Search from './components/Search';
 import Map from './components/Map';
+import IpInfo from './components/Card';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
@@ -9,6 +10,11 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
+  text-align: center;
+  width: 100%;
+`;
+
+const Card = styled.div`
   text-align: center;
   width: 100%;
 `;
@@ -24,6 +30,9 @@ function App() {
       <Header>
         <Search />
       </Header>
+      <Card>
+        <IpInfo />
+      </Card>
       <Main>
         <Map />
       </Main>
