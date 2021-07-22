@@ -1,30 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
-const Card = () => {
+const Card = ({ipDomain}) => {
 
-    const [ip, setIp] = useState([]);
 
-    const address = "8.8.8.8";
-    const api_key = "at_V94QccAGWuOWGUzwS6HbuVzPXqpo8";
-
-    useEffect(() => {
-        fetch("https://geo.ipify.org/api/v1")
-            .then((res) => res.json())
-            .then((data) =>{
-                console.log(data);
-
-                const useIp = {
-                    data: {apiKey: api_key, ipAddress: address}
-                }
-                setIp(useIp);
-            });
-    }, []);
+    const address = {ipDomain};
 
     return (
         <div>
-            <h1>IP info</h1>
+            <p>{ipDomain.isp}</p>
+            <p>{ipDomain.ip}</p>
+            <p>{ipDomain.isp}</p>
         </div>
     );
 }
  
 export default Card;
+
+/*
+{"ip":"8.8.8.8",
+"location":{"country":"US","region":"California","city":"Mountain View","lat":37.38605,"lng":-122.08385,"postalCode":"94035","timezone":"-07:00","geonameId":5375480},
+"domains":["0--9.ru","000.lyxhwy.xyz","000180.top","00049ok.com","000xs.net"],
+"as":{"asn":15169,"name":"Google LLC","route":"8.8.8.0\/24","domain":"https:\/\/about.google\/intl\/en\/","type":"Content"},
+"isp":"Google LLC","proxy":{"proxy":false,"vpn":false,"tor":false}}*/

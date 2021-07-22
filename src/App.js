@@ -1,7 +1,5 @@
 import React from 'react';
 import Search from './components/Search';
-import Map from './components/Map';
-import IpInfo from './components/Card';
 import styled from '@emotion/styled';
 
 const Container = styled.div`
@@ -31,10 +29,8 @@ function App() {
         <Search />
       </Header>
       <Card>
-        <IpInfo />
       </Card>
       <Main>
-        <Map />
       </Main>
     </Container>
   );

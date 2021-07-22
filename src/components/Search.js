@@ -1,4 +1,7 @@
 import styled from '@emotion/styled';
+import React, { Component } from 'react';
+import Map from './Map';
+import Card from './Card';
 
 const Container = styled.div`
     background-image: url('/images/pattern-bg.png');
@@ -39,24 +42,72 @@ const SearchBtn = styled.input`
     cursor: pointer;
 `;
 
-const sendIp = () =>{
-    console.log('Holiss');
-}
+class search extends Component {
 
-const header = () => {
-    return (
+    constructor(props) {
+        super(props);
+        this.state = {
+            value: '',
+            ip: []
+        };
+    
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+    
+    handleSubmit(event) {
+        if (this.state.value === ''){
+            alert('Empy field');
+        }
+        else{
+            alert('IP: ' + this.state.value);
+            fetch(
+                `https://geo.ipify.org/api/v1?apiKey=at_V94QccAGWuOWGUzwS6HbuVzPXqpo8&ipAddress=${this.state.value}&domain=${this.state.value}`
+              )
+                .then((response) => response.json())
+                .then((response) => {
+                  this.setState({
+                    ip: response
+                  });
+                })
+                .catch((error) => console.log(error));
+                event.preventDefault();
+                this.setState({value: ''});
+                console.log(this.state.ip);
+        }
+    }
+    
+
+    render() { 
+        return (
         <Container>
             <Title>IP Address Tracker</Title>
+            <form onSubmit={this.handleSubmit}>
             <Search>
-                <SearchBar type="text" placeholder='Search for any IP address or domain'></SearchBar>
+                <SearchBar type='text' value={this.state.value}
+                    onChange={this.handleChange}
+                    placeholder='Search for any IP address or domain'
+                    required
+                >
+                </SearchBar>
                 <SearchBtn
                     type='submit'
                     value='>'
-                    onClick={() => sendIp()}
-                ></SearchBtn>
+                >
+                </SearchBtn>
             </Search>
+            </form>
+            <Card
+                ipDomain={this.state.value}
+            />
+            <Map/>
         </Container>
-    );
+        );
+    }
 }
-
-export default header;
+ 
+export default search;
